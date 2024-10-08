@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Step Signup Form</title>
+  <link rel="stylesheet" href="project.css">
+</head>
+<body>
+  <div class="form-container">
+    <form id="signup-form" action="submit_form.php" method="POST">
+      <h1>Signup Form</h1>
+
+      <!-- Step Progress Indicator -->
+      <div class="step-progress">
+        <div class="step active">Name</div>
+        <div class="step">Contact Info</div>
+        <div class="step">Birth</div>
+        <div class="step">Submit</div>
+      </div>
+
+      <!-- Step 1: Name Field -->
+      <div class="form-step active">
+        <h2>Name Field:</h2>
+        <label for="firstname">First Name</label>
+        <input type="text" id="firstname" name="firstname" required>
+        
+        <label for="lastname">Last Name</label>
+        <input type="text" id="lastname" name="lastname" required>
+
+        <div class="button-group">
+          <button type="button" class="btn next">Next</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Contact Info -->
+      <div class="form-step">
+        <h2>Contact Info:</h2>
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required>
+        
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" required>
+
+        <div class="button-group">
+          <button type="button" class="btn prev">Previous</button>
+          <button type="button" class="btn next">Next</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Birth Info -->
+      <div class="form-step">
+        <h2>Birth Information:</h2>
+        <label for="birthdate">Date of Birth</label>
+        <input type="date" id="birthdate" name="birthdate" required>
+
+        <div class="button-group">
+          <button type="button" class="btn prev">Previous</button>
+          <button type="button" class="btn next">Next</button>
+        </div>
+      </div>
+
+      <!-- Step 4: Submit -->
+      <div class="form-step">
+        <h2>Submit Form</h2>
+        <p>Please review your details and click submit.</p>
+        <div class="button-group">
+          <button type="button" class="btn prev">Previous</button>
+          <button type="submit" class="btn submit">Submit</button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+  <script >
+    const steps = document.querySelectorAll('.step');
+const formSteps = document.querySelectorAll('.form-step');
+const nextButtons = document.querySelectorAll('.next');
+const prevButtons = document.querySelectorAll('.prev');
+let currentStep = 0;
+
+nextButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    if (currentStep < formSteps.length - 1) {
+      formSteps[currentStep].classList.remove('active');
+      steps[currentStep].classList.remove('active');
+      currentStep++;
+      formSteps[currentStep].classList.add('active');
+      steps[currentStep].classList.add('active');
+    }
+  });
+});
+
+prevButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    if (currentStep > 0) {
+      formSteps[currentStep].classList.remove('active');
+      steps[currentStep].classList.remove('active');
+      currentStep--;
+      formSteps[currentStep].classList.add('active');
+      steps[currentStep].classList.add('active');
+    }
+  });
+});
+  </script>
+  
+</body>
+</html>
